@@ -22,7 +22,6 @@ func errorHandlingMiddleWare(log *log.Logger) gin.HandlerFunc {
 		if err == nil {
 			return
 		}
-
 		log.Printf("unexpected error: %s\n", err.Error())
 	}
 }
