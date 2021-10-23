@@ -9,7 +9,6 @@ import (
 
 type envConfig struct {
 	Version string `env:"VERSION" envDefault:"0.0.1"`
-	HOST    string `env:"URL_HOST,required"`
 	PORT    string `env:"PORT,required"`
 }
 

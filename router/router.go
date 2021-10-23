@@ -35,6 +35,8 @@ func SetupRouter() *gin.Engine {
 	router.GET("/health", handlers.HealthHandler)
 	router.GET("/version", handlers.VersionHandler)
 
+	router.POST("/api/litclock-service/v1/numeric-time", handlers.ConvertTime)
+
 	return router
 }
 
