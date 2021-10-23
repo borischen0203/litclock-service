@@ -15,7 +15,7 @@ func ConvertTimeService(request dto.TimeConvertRequest, response dto.TimeConvert
 		return 400, response, err
 	}
 
-	t, err := time.Parse("15:04", request.NumbericTime)
+	t, err := time.Parse("15:04", request.NumericTime)
 
 	if err != nil {
 		logger.Error.Printf("[ConvertTimeService] time parsing error: %v\n", err)

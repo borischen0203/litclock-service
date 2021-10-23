@@ -1,10 +1,10 @@
 definitions:
   dto.TimeConvertRequest:
     properties:
-      numbericTime:
+      numericTime:
         type: string
     required:
-    - numbericTime
+    - numericTime
     type: object
   dto.TimeConvertResponse:
     properties:
@@ -27,7 +27,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: convert numberic time to human friendly text
+      description: convert numeric time to human friendly text
       parameters:
       - description: body
         in: body

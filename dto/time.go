@@ -8,12 +8,12 @@ import (
 
 /**
  * This struct creates a time convert request from
- * the one paramater: numberic time
+ * the one paramater: numeric time
  *
- * @param NumbericTime      clocks time that display as numbers
+ * @param NumericTime      clocks time that display as numbers
  */
 type TimeConvertRequest struct {
-	NumbericTime string `json:"numbericTime" binding:"required"`
+	NumericTime string `json:"numericTime" binding:"required"`
 }
 
 /**
@@ -39,11 +39,11 @@ func (r TimeConvertRequest) Validate() (bool, e.ErrorInfo) {
 
 //IsValidAlias function validate Alias is valid alphabet or number, and less than 30 lengths
 func (r TimeConvertRequest) IsValidTimeFormate() bool {
-	_, err := time.Parse("15:04", r.NumbericTime)
+	_, err := time.Parse("15:04", r.NumericTime)
 	return err == nil
 }
 
 //IsEmpty function validate long url is not empty input
 func (r TimeConvertRequest) IsEmpty() bool {
-	return r.NumbericTime == ""
+	return r.NumericTime == ""
 }

@@ -25,7 +25,7 @@ var doc = `{
     "paths": {
         "/api/litclock-service/v1/numeric-time": {
             "post": {
-                "description": "convert numberic time to human friendly text",
+                "description": "convert numeric time to human friendly text",
                 "consumes": [
                     "application/json"
                 ],
@@ -100,10 +100,10 @@ var doc = `{
         "dto.TimeConvertRequest": {
             "type": "object",
             "required": [
-                "numbericTime"
+                "numericTime"
             ],
             "properties": {
-                "numbericTime": {
+                "numericTime": {
                     "type": "string"
                 }
             }

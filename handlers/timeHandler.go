@@ -14,7 +14,7 @@ import (
 )
 
 // @Summary convert time from humeric to text
-// @Description convert numberic time to human friendly text
+// @Description convert numeric time to human friendly text
 // @Tags convert time
 // @Accept json
 // @Produce json

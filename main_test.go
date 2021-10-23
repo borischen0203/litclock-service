@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var ConvertTime = "/api/litclock-service/v1/numeric-time"
+var ConvertTimeAPI = "/api/litclock-service/v1/numeric-time"
 
 func TestHealth(t *testing.T) {
 	router := router.SetupRouter()
@@ -42,13 +42,13 @@ func TestInputInvalidTime1(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "24:00",
+		NumericTime: "24:00",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -65,13 +65,13 @@ func TestInputInvalidTime2(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "-01:00",
+		NumericTime: "-01:00",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -88,13 +88,13 @@ func TestInputInvalidTime3(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "1:60",
+		NumericTime: "1:60",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -111,13 +111,13 @@ func TestInputInvalidTime4(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "1:-1",
+		NumericTime: "1:-1",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -134,13 +134,13 @@ func TestInputInvalidTime5(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "24:60",
+		NumericTime: "24:60",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -157,13 +157,13 @@ func TestInputInvalidTime6(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "01:01:05",
+		NumericTime: "01:01:05",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -180,13 +180,13 @@ func TestInputInvalidTime7(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "1+1:1+1",
+		NumericTime: "1+1:1+1",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -203,13 +203,13 @@ func TestInputInvalidType1(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "Hello World",
+		NumericTime: "Hello World",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -226,13 +226,13 @@ func TestInputInvalidType2(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "!@#$%:^&*()",
+		NumericTime: "!@#$%:^&*()",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -240,7 +240,7 @@ func TestInputInvalidType2(t *testing.T) {
 	assert.Equal(t, string(expected), w.Body.String())
 }
 
-//Should return 400 with "Invalid input" when NumbericTime field is empty string.
+//Should return 400 with "Invalid input" when NumericTime field is empty string.
 func TestInputEmptyString(t *testing.T) {
 	logger.Setup()
 	config.Setup()
@@ -249,13 +249,13 @@ func TestInputEmptyString(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "",
+		NumericTime: "",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -263,7 +263,7 @@ func TestInputEmptyString(t *testing.T) {
 	assert.Equal(t, string(expected), w.Body.String())
 }
 
-//Should return 400 with "Invalid input" when missing NumbericTime field.
+//Should return 400 with "Invalid input" when missing NumericTime field.
 func TestMissingField(t *testing.T) {
 	logger.Setup()
 	config.Setup()
@@ -276,7 +276,7 @@ func TestMissingField(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -293,7 +293,7 @@ func TestInputMinuteZero(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:00",
+		NumericTime: "13:00",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -303,7 +303,7 @@ func TestInputMinuteZero(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -320,7 +320,7 @@ func TestInputMinuteOne(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:01",
+		NumericTime: "13:01",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -330,7 +330,7 @@ func TestInputMinuteOne(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -347,7 +347,7 @@ func TestInputMinute59(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:59",
+		NumericTime: "13:59",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -357,7 +357,7 @@ func TestInputMinute59(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -374,7 +374,7 @@ func TestInputMinute15(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:15",
+		NumericTime: "13:15",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -384,7 +384,7 @@ func TestInputMinute15(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -401,7 +401,7 @@ func TestInputMinute30(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:30",
+		NumericTime: "13:30",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -411,7 +411,7 @@ func TestInputMinute30(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -428,7 +428,7 @@ func TestInputMinutes45(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:45",
+		NumericTime: "13:45",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -438,7 +438,7 @@ func TestInputMinutes45(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -455,7 +455,7 @@ func TestInputMinuteMoreThan30(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:31",
+		NumericTime: "13:31",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -465,7 +465,7 @@ func TestInputMinuteMoreThan30(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -482,7 +482,7 @@ func TestInputMinuteLess30(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:29",
+		NumericTime: "13:29",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -492,7 +492,7 @@ func TestInputMinuteLess30(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -509,7 +509,7 @@ func TestInputMinuteLess15(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:14",
+		NumericTime: "13:14",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -519,7 +519,7 @@ func TestInputMinuteLess15(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -536,7 +536,7 @@ func TestInputMinuteLess16(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "13:16",
+		NumericTime: "13:16",
 	}
 
 	responseBody := dto.TimeConvertResponse{
@@ -546,7 +546,7 @@ func TestInputMinuteLess16(t *testing.T) {
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(responseBody)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -564,18 +564,18 @@ func TestInputHour13and01(t *testing.T) {
 	w2 := httptest.NewRecorder()
 
 	requestBody1 := dto.TimeConvertRequest{
-		NumbericTime: "01:01",
+		NumericTime: "01:01",
 	}
 
 	requestBody2 := dto.TimeConvertRequest{
-		NumbericTime: "13:01",
+		NumericTime: "13:01",
 	}
 
 	request, _ := json.Marshal(requestBody1)
 	expected, _ := json.Marshal(requestBody2)
 
-	req1, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
-	req2, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(expected)))
+	req1, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
+	req2, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(expected)))
 
 	router.ServeHTTP(w1, req1)
 	router.ServeHTTP(w2, req2)
@@ -594,18 +594,18 @@ func TestInputHour12and00(t *testing.T) {
 	w2 := httptest.NewRecorder()
 
 	requestBody1 := dto.TimeConvertRequest{
-		NumbericTime: "12:01",
+		NumericTime: "12:01",
 	}
 
 	requestBody2 := dto.TimeConvertRequest{
-		NumbericTime: "00:01",
+		NumericTime: "00:01",
 	}
 
 	request, _ := json.Marshal(requestBody1)
 	expected, _ := json.Marshal(requestBody2)
 
-	req1, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
-	req2, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(expected)))
+	req1, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
+	req2, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(expected)))
 
 	router.ServeHTTP(w1, req1)
 	router.ServeHTTP(w2, req2)
@@ -624,18 +624,18 @@ func TestInputHour12and0(t *testing.T) {
 	w2 := httptest.NewRecorder()
 
 	requestBody1 := dto.TimeConvertRequest{
-		NumbericTime: "12:00",
+		NumericTime: "12:00",
 	}
 
 	requestBody2 := dto.TimeConvertRequest{
-		NumbericTime: "0:00",
+		NumericTime: "0:00",
 	}
 
 	request, _ := json.Marshal(requestBody1)
 	expected, _ := json.Marshal(requestBody2)
 
-	req1, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
-	req2, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(expected)))
+	req1, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
+	req2, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(expected)))
 
 	router.ServeHTTP(w1, req1)
 	router.ServeHTTP(w2, req2)
@@ -653,13 +653,13 @@ func TestInputMin0(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	requestBody := dto.TimeConvertRequest{
-		NumbericTime: "0:0",
+		NumericTime: "0:0",
 	}
 
 	request, _ := json.Marshal(requestBody)
 	expected, _ := json.Marshal(errors.InvalidInputError)
 
-	req, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
+	req, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
 
 	router.ServeHTTP(w, req)
 
@@ -677,18 +677,18 @@ func TestInputHour01and1(t *testing.T) {
 	w2 := httptest.NewRecorder()
 
 	requestBody1 := dto.TimeConvertRequest{
-		NumbericTime: "01:00",
+		NumericTime: "01:00",
 	}
 
 	requestBody2 := dto.TimeConvertRequest{
-		NumbericTime: "1:00",
+		NumericTime: "1:00",
 	}
 
 	request, _ := json.Marshal(requestBody1)
 	expected, _ := json.Marshal(requestBody2)
 
-	req1, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(request)))
-	req2, _ := http.NewRequest(http.MethodPost, ConvertTime, strings.NewReader(string(expected)))
+	req1, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(request)))
+	req2, _ := http.NewRequest(http.MethodPost, ConvertTimeAPI, strings.NewReader(string(expected)))
 
 	router.ServeHTTP(w1, req1)
 	router.ServeHTTP(w2, req2)
