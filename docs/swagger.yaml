@@ -1,6 +1,58 @@
+definitions:
+  dto.TimeConvertRequest:
+    properties:
+      numbericTime:
+        type: string
+    required:
+    - numbericTime
+    type: object
+  dto.TimeConvertResponse:
+    properties:
+      textTime:
+        type: string
+    required:
+    - textTime
+    type: object
+  errors.ErrorInfo:
+    properties:
+      code:
+        type: integer
+      msg:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /api/litclock-service/v1/numeric-time:
+    post:
+      consumes:
+      - application/json
+      description: convert numberic time to human friendly text
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TimeConvertRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/dto.TimeConvertResponse'
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/errors.ErrorInfo'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorInfo'
+      summary: convert time from humeric to text
+      tags:
+      - convert time
   /health:
     get:
       responses:

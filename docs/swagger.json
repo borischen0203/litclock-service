@@ -4,6 +4,52 @@
         "contact": {}
     },
     "paths": {
+        "/api/litclock-service/v1/numeric-time": {
+            "post": {
+                "description": "convert numberic time to human friendly text",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "convert time"
+                ],
+                "summary": "convert time from humeric to text",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TimeConvertRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/dto.TimeConvertResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "schema": {
+                            "$ref": "#/definitions/errors.ErrorInfo"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/errors.ErrorInfo"
+                        }
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
                 "summary": "health checker API",
@@ -27,6 +73,41 @@
                             "type": "string"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.TimeConvertRequest": {
+            "type": "object",
+            "required": [
+                "numbericTime"
+            ],
+            "properties": {
+                "numbericTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.TimeConvertResponse": {
+            "type": "object",
+            "required": [
+                "textTime"
+            ],
+            "properties": {
+                "textTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "errors.ErrorInfo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "msg": {
+                    "type": "string"
                 }
             }
         }

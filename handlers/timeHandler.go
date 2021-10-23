@@ -13,6 +13,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary convert time from humeric to text
+// @Description convert numberic time to human friendly text
+// @Tags convert time
+// @Accept json
+// @Produce json
+// @Param body body dto.TimeConvertRequest true "body"
+// @Success 200 {object} dto.TimeConvertResponse "ok"
+// @Failure 400 {object} errors.ErrorInfo "Invalid input"
+// @Failure 500 {object} errors.ErrorInfo "Internal server error"
+// @Router /api/litclock-service/v1/numeric-time [post]
 func ConvertTime(c *gin.Context) {
 	request := dto.TimeConvertRequest{}
 	response := dto.TimeConvertResponse{}
