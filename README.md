@@ -22,6 +22,9 @@ Numeric Time -> Human Friendly Text:
 
 Required
 - Install `curl` cli(https://formulae.brew.sh/formula/curl)
+```bash
+brew install curl
+```
 
 Use below curl command to call API and input any time in numericTime value
 ```bash
@@ -70,18 +73,28 @@ Required
 - Install go(version >= 1.6)
 - Install `make` cli(https://formulae.brew.sh/formula/make)
 - Install `curl` cli(https://formulae.brew.sh/formula/curl)
-
 ```bash
-# clone a repo
+brew install make
+```
+```bash
+brew install curl
+```
+
+### Run steps
+Step1: Clone the repo
+```bash
 git clone https://github.com/borischen0203/litclock-service.git
-
-# Use `make` to execute makefile run test and build
+```
+Step2: Use `make` to execute makefile run test and build
+```bash
 make all
-
-# Run the local server
+```
+Step3: Use `make` to execute makefile run local server
+```bash
 make run
-
-# Use `curl` to call API
+```
+Step4: # Use `curl` to call API
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "http://localhost:8080/api/litclock-service/v1/numeric-time"
 ```
 
