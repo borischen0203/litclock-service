@@ -1,3 +1,8 @@
+<img src="https://raw.githubusercontent.com/scraly/gophers/main/yoda-gopher.png" alt="yoda-gopher" width=320>
+
+[![CICD](https://github.com/borischen0203/litclock/actions/workflows/CICD.yml/badge.svg)](https://github.com/borischen0203/litclock/actions/workflows/CICD.yml)
+
+
 # litclock-service
 This is a litclock-service. You can convert numeric time to human friendly text.
 
@@ -11,45 +16,59 @@ Numeric Time -> Human Friendly Text:
 
 # How to use
 
-
-## TBD
+## Run directly:
+Domain: https://litclock-service.herokuapp.com
+- The service already deployed on Heroku.
 - No need to run main.go file, you can type the below command in the terminal directly.
 - The app may sleep without using. Just wait for a few seconds to wake it up.
 
-### pre:
+Required
 - Install `curl` cli(https://formulae.brew.sh/formula/curl)
 
+Use below curl command to call API and input any time in numericTime value
 ```bash
-#Use curl command to call API and input any time in numericTime value
 curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "https://litclock-service.herokuapp.com/api/litclock-service/v1/numeric-time"
-
 ```
-### Demo
+
+Demo
 ```bash
 > curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "https://litclock-service.herokuapp.com/api/litclock-service/v1/numeric-time"
 > {"textTime":"Eight past one"}
 ```
 
-## Docker:
+## Run in Postman:
+Use below API path and body in Postman
 ```bash
-# Step1: docker pull
+[POST] https://litclock-service.herokuapp.com/api/litclock-service/v1/numeric-time
+```
+Body
+```bash
+{
+    "numericTime" : "13:08"
+}
+```
+
+## Run in Docker:
+Required
+- Install docker
+
+### Run process
+Step1: Pull docker image (borischen0203/litclock-service)
+```bash
 docker pull borischen0203/litclock-service
-
-# Step2: docker run
+```
+Step2: Run docker image as below command
+```bash
 docker run -it --rm -p 8080:8080 borischen0203/litclock
-
-# Step3: Create a new terminal window and execute curl
+```
+Step3: Create a new terminal window and execute curl
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "http://localhost:8080/api/litclock-service/v1/numeric-time"
 ```
-### Docker run demo
-```bash
->
->
-```
 
-## Local:
+## Run in Local:
 
-## Required
+Required
 - Install go(version >= 1.6)
 - Install `make` cli(https://formulae.brew.sh/formula/make)
 - Install `curl` cli(https://formulae.brew.sh/formula/curl)
@@ -75,11 +94,13 @@ curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' 
 ```
 
 ## Tech Stack
-    - Golang
-    - Gin framework
-    - RESTful API
-    - Swagger
-    - Docker
-    - Github action(CI)
-    - Heroku (CD)
+- Golang
+- Gin framework
+- RESTful API
+- Swagger
+- Docker
+- Github action(CI)
+- Heroku (CD)
 
+## Todo:
+- [ ]

@@ -29,9 +29,11 @@ clean:
 test:
 	go test -v -count=1 -race ./...
 
+## docker build: build docker image
 docker_build:
 	docker build . -t ${APP}
 
+## docker run: run docker image with local build
 docker_run:
 	docker run -it --rm -p 8080:8080 ${APP}
 
