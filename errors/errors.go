@@ -4,7 +4,7 @@ package errors
  * This struct creates a error info from the two parts: Code and Msg,
  * , which is uint16 and String, respectively.
  *
- * @param Code               the code of error as a string
+ * @param Code           the code of error as a string
  * @param Msg            the message of error as a string
  */
 type ErrorInfo struct {

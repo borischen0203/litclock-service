@@ -1,8 +1,15 @@
 package handlers
 
-import (
-	// "fmt"
+/***
+ *
+ * This file mainly handle time
+ *
+ * @author: Boris
+ * @version: 2021-10-23
+ *
+ */
 
+import (
 	"net/http"
 
 	"github.com/borischen0203/litclock-service/dto"

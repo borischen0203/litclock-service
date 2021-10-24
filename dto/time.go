@@ -1,5 +1,12 @@
 package dto
 
+/**
+ * Construct of time for API
+ *
+ * @author: Boris
+ * @version: 2021-10-23
+ *
+ */
 import (
 	"time"
 
