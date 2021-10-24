@@ -1,6 +1,6 @@
-<img src="https://raw.githubusercontent.com/scraly/gophers/main/yoda-gopher.png" alt="yoda-gopher" width=320>
+<img src="https://raw.githubusercontent.com/scraly/gophers/main/yoda-gopher.png" alt="yoda-gopher" width=350>
 
-[![CICD](https://github.com/borischen0203/litclock/actions/workflows/CICD.yml/badge.svg)](https://github.com/borischen0203/litclock/actions/workflows/CICD.yml)
+[![CICD](https://github.com/borischen0203/litclock-service/actions/workflows/CICD.yml/badge.svg)](https://github.com/borischen0203/litclock-service/actions/workflows/CICD.yml)
 
 
 # litclock-service
@@ -13,14 +13,12 @@ Numeric Time -> Human Friendly Text:
 ## Features
 - Convert numeric time to human text.
 
-
 # How to use
 
 ## Run directly:
-Domain: https://litclock-service.herokuapp.com
 - The service already deployed on Heroku.
 - No need to run main.go file, you can type the below command in the terminal directly.
-- The app may sleep without using. Just wait for a few seconds to wake it up.
+- `The app may sleep without using. Just wait for a few seconds to wake it up.`
 
 Required
 - Install `curl` cli(https://formulae.brew.sh/formula/curl)
@@ -32,8 +30,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' 
 
 Demo
 ```bash
-> curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "https://litclock-service.herokuapp.com/api/litclock-service/v1/numeric-time"
-> {"textTime":"Eight past one"}
+$ curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "https://litclock-service.herokuapp.com/api/litclock-service/v1/numeric-time"
+$ {"textTime":"Eight past one"}
 ```
 
 ## Run in Postman:
@@ -59,7 +57,7 @@ docker pull borischen0203/litclock-service
 ```
 Step2: Run docker image as below command
 ```bash
-docker run -it --rm -p 8080:8080 borischen0203/litclock
+docker run -it --rm -p 8080:8080 borischen0203/litclock-service
 ```
 Step3: Create a new terminal window and execute curl
 ```bash
@@ -89,8 +87,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' 
 
 ### Local run demo:
 ```bash
-> curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "http://localhost:8080/api/litclock-service/v1/numeric-time"
-> {"textTime":"Eight past one"}
+$ curl -X POST -H "Content-Type: application/json" -d '{"numericTime" : "13:08"}' "http://localhost:8080/api/litclock-service/v1/numeric-time"
+$ {"textTime":"Eight past one"}
 ```
 
 ## Tech Stack
